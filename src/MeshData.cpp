@@ -7,8 +7,13 @@ MeshData::MeshData(int l, int d)
 	vDepth = d;
 	for (size_t i = 0; i < l * d; i++)
 	{
-		data[i] = gameBlock::UNSET;
+		data[i] = gameBlock::SET_WITH_X;
 	}
+}
+
+MeshData::~MeshData()
+{
+	delete[] data;
 }
 
 int MeshData::getLength()
