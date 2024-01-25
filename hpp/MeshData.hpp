@@ -10,6 +10,7 @@ public:
 	int getLength();
 	int getDepth();
 	gameBlock & getDataAt(int pLength, int pDepth);
+	void		setDataAt(int pLength, int pDepth,gameBlock pGameDataThere);
 private:
 	gameBlock *data;
 	int vLength;

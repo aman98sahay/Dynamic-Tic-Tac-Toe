@@ -14,7 +14,7 @@ void MeshPrinter::PrivatePrintLocationColor(gameBlock pBlockType)
 		cout << "\x1B[48;5;214m#\033[0m"; break;
 	case gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE:
 	case gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE:
-		cout << "\x1B[48;5;231m#\033"; break;
+		cout << "\x1B[48;5;231m#\033[0m"; break;
 	}
 }
 
@@ -55,7 +55,7 @@ void MeshPrinter::printatLocation(gameBlock pBlockType, int l, int d)
 	if (isMarkLocation(l, d)) {
 		switch (pBlockType) {
 		case gameBlock::UNSET:
-			cout << "#"; break; // TODO is a problem how do I know the length size to calculate the number number
+			cout << "#"; break; 
 		case gameBlock::SET_WITH_O:
 		case gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE:
 			cout << "O"; break;
@@ -76,7 +76,21 @@ void MeshPrinter::printatLocation(gameBlock pBlockType, int l, int d)
 void MeshPrinter::printMesh(MeshData& obj)
 {
 	using std::cout;
+	printf("       ");
+	for (int l = 0; l <obj.getLength(); l++) {
+		printf("%2d  ", l + 1);
+	}
+
+	cout << "\n";
+
 	for (int d = 0; d < 4 * obj.getDepth() - 1; d++) {
+
+		if (((d - 1) / 4) * 4 + 1 == d) {
+			printf("%5d  ", d / 4 + 1);
+		}
+		else {
+			printf("       ");
+		}
 		for (int l = 0; l < 4 * obj.getLength() - 1; l++) {
 			printatLocation(obj.getDataAt(l/4, d/4), l, d);
 		}
