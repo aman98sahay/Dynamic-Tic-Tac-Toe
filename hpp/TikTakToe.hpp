@@ -29,6 +29,8 @@ private:
 	
 	void ChangeDataOnInput ();
 
-	CurrentInputLocation input;
+	CurrentInputLocation vInput;
 	MeshData& data;
+	bool isGameOver;
+	int noOfTurns;
 };

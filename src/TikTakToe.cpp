@@ -5,7 +5,11 @@
 #include "MeshData.hpp"
 #include "MeshPrinter.hpp"
 
-TikTakToe::TikTakToe(int length, int depth) : data(*(new MeshData(length, depth))), input{ 0,0,false }
+TikTakToe::TikTakToe(int length, int depth) :
+	data(*(new MeshData(length, depth))),
+	vInput{ 0,0,false },
+	isGameOver(false),
+	noOfTurns(0)
 {
 
 }
@@ -13,11 +17,12 @@ TikTakToe::TikTakToe(int length, int depth) : data(*(new MeshData(length, depth)
 void TikTakToe::startGame()
 {
 	using std::cout;
-	while(true) {
+	while (noOfTurns != data.getLength() * data.getDepth()) {
 		system("cls");
 		MeshPrinter::printMesh(data);
 		takeUserInput();
 		ChangeDataOnInput();
+		noOfTurns++;
 	}
 
 
@@ -125,25 +130,25 @@ bool TikTakToe::isGameOverAndMarkItIfTrue()
 
 void TikTakToe::ChangeDataOnInput()
 {
-	switch (input.isPlayerXInput) {
+	switch (vInput.isPlayerXInput) {
 	case true:
-		data.setDataAt(input.l - 1, input.d - 1, gameBlock::SET_WITH_X);
+		data.setDataAt(vInput.l - 1, vInput.d - 1, gameBlock::SET_WITH_X);
 		break;
 	case false:
-		data.setDataAt(input.l - 1, input.d - 1, gameBlock::SET_WITH_O);
+		data.setDataAt(vInput.l - 1, vInput.d - 1, gameBlock::SET_WITH_O);
 	}
 
-	input.isPlayerXInput = !input.isPlayerXInput;
+	vInput.isPlayerXInput = !vInput.isPlayerXInput;
 }
 
 void TikTakToe::takeUserInput()
 {
-	using std::cout , std::cin;
+	using std::cout, std::cin;
 	char ch = 'f';
 
 	cout << "\nChance of player ";
 
-	if (input.isPlayerXInput) {
+	if (vInput.isPlayerXInput) {
 		cout << "'X'";
 	}
 	else {
@@ -155,14 +160,14 @@ void TikTakToe::takeUserInput()
 
 	while (true) {
 
-		while (!bool(cin >> input.l >> ch >> input.d)) {
+		while (!bool(cin >> vInput.l >> ch >> vInput.d)) {
 			endl(cout << "invalid input, please try again:");
 			cin.clear(); // clears the error flags
-			// this line discards all the input waiting in the stream
+			// this line discards all the vInput waiting in the stream
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 
-		if (input.l > data.getLength() || input.d > data.getDepth() || data.getDataAt(input.l -1 ,input.d - 1) != gameBlock::UNSET) {
+		if (vInput.l > data.getLength() || vInput.d > data.getDepth() || data.getDataAt(vInput.l - 1, vInput.d - 1) != gameBlock::UNSET) {
 
 			endl(cout << "invalid input, please try again:");
 		}
