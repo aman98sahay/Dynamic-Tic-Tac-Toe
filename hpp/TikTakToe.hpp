@@ -16,7 +16,7 @@ public:
 
 
 	
-	TikTakToe(int length, int depth);
+	TikTakToe(int depth, int length);
 
 	~TikTakToe();
 
@@ -24,15 +24,14 @@ public:
 	void takeUserInput();
 private:
 
-	bool isDiagonalWinningSequence(bool pIsHorizontalBigger, bool pIsClockWiseLater, int l, int d, bool isX);
-	bool isNonDiagonalWinnerSequence(int pI, bool pIsHorizontal);
+	bool isDiagonalWinningSequenceMarkIfTrue(bool pIsHorizontalBigger, bool pIsClockWiseLater, int l, int d, bool isX);
+	bool isNonDiagonalWinnerSequenceMarkIfTrue(int pI, bool pIsHorizontal);
 
-	bool isGameBlockX(gameBlock block);
-	bool isGameBlockO(gameBlock block);
-	
-	bool isGameOverAndMarkItIfTrue();
+	static bool isGameBlockX(gameBlock block);
 	
 	void ChangeDataOnInput ();
+
+	void internalGameRuleChecker();
 
 	CurrentInputLocation vInput;
 	MeshData& data;
