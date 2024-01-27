@@ -1,5 +1,4 @@
 #include <iostream>
-#include<conio.h>
 
 #include "TikTakToe.hpp"
 #include "MeshData.hpp"
@@ -25,7 +24,11 @@ void TikTakToe::startGame()
 {
 	using std::cout;
 	while (noOfTurns != data.getLength() * data.getDepth() && !isGameOver) {
+#if		_WIN32
 		system("cls");
+#elif	__APPLE__ || __linux__
+		system("clear");
+#endif
 		MeshPrinter::printMesh(data);
 		takeUserInput();
 		ChangeDataOnInput();
