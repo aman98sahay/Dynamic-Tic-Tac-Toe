@@ -14,10 +14,15 @@ TikTakToe::TikTakToe(int length, int depth) :
 
 }
 
+TikTakToe::~TikTakToe()
+{
+	delete& data;
+}
+
 void TikTakToe::startGame()
 {
 	using std::cout;
-	while (noOfTurns != data.getLength() * data.getDepth()) {
+	while (noOfTurns != data.getLength() * data.getDepth() && !isGameOver) {
 		system("cls");
 		MeshPrinter::printMesh(data);
 		takeUserInput();
@@ -25,31 +30,114 @@ void TikTakToe::startGame()
 		noOfTurns++;
 	}
 
+	// to refresh the mesh after the last input is given in no win situation 
+	system("cls");
+	MeshPrinter::printMesh(data);
+
+	if (isGameOver) {
+
+	}
+	else {
+
+	}
 
 }
-
-// TODO: this is not going to be that easy, approaches till now ,either add another parameter to the 
-// function or imagine another interface.
-bool TikTakToe::isDiagonalWinningSequence(int pL, bool pIsHorizontalBigger, bool pIsForwardLeading)
+/*
+* 
+* There are 2 separate cases that have to be considered
+* first if the no of rows more than the number of columns(if they are same 
+* we can just call the function with one and the logic should work, 
+* after that we mention is the diagonal we are checking whether it come clockwise first or second
+* 
+* 
+*/
+bool TikTakToe::isDiagonalWinningSequence(bool pIsHorizontalBigger, bool pIsClockWiseLater, int l, int d, bool isX)
 {
 	if (pIsHorizontalBigger) {
 
+		if (pIsClockWiseLater) {
+			if (d == 0 && (l < data.getDepth() - 1))
+				return false;
+		}
+		else {
+			if (d == 0 && (l > data.getLength() - data.getDepth()))
+				return false;
+		}
+
+		if (isGameBlockX(data.getDataAt(l, d)) == isX) {
+
+			if (d == data.getDepth() - 1)
+				return true;
+
+			if (pIsClockWiseLater)
+				return isDiagonalWinningSequence(pIsHorizontalBigger, pIsClockWiseLater, l - 1, d + 1, isX);
+			else
+				return isDiagonalWinningSequence(pIsHorizontalBigger, pIsClockWiseLater, l + 1, d + 1, isX);
+
+		}
+		else
+			return false;
 	}
 	else {
 
+		if (pIsClockWiseLater) {
+			if (d == 0 && (d > data.getDepth() - data.getLength()))
+				return false;
+		}
+		else {
+			if (d == 0 && (d < data.getLength() - 1))
+				return false;
+		}
+
+		if (isGameBlockX(data.getDataAt(l, d)) == isX) {
+
+			if (l == data.getLength() - 1)
+				return true;
+
+			if (pIsClockWiseLater)
+				return isDiagonalWinningSequence(pIsHorizontalBigger, pIsClockWiseLater, l + 1, d + 1, isX);
+			else
+				return isDiagonalWinningSequence(pIsHorizontalBigger, pIsClockWiseLater, l + 1, d - 1, isX);
+
+		}
+		else
+			return false;
 	}
 	return false;
 }
 
+/*
+input
+	pI : the number ( starting with 0) of the row or column
+
+*/
 bool TikTakToe::isNonDiagonalWinnerSequence(int pI, bool pIsHorizontal)
 {
 	if (pIsHorizontal) {
-
+		bool CheckingForX = isGameBlockX(data.getDataAt(0, pI));
+		for (int i = 1; i < data.getLength(); i++) {
+			if (CheckingForX == isGameBlockX(data.getDataAt(i, pI)))
+				return true;
+		}
 	}
 	else {
-
+		bool CheckingForX = isGameBlockX(data.getDataAt(pI, 0));
+		for (int i = 1; i < data.getLength(); i++) {
+			if (CheckingForX == isGameBlockX(data.getDataAt(pI, i)))
+				return true;
+		}
 	}
 	return false;
+}
+
+bool TikTakToe::isGameBlockX(gameBlock block)
+{
+	return block == gameBlock::SET_WITH_X || block == gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE;
+}
+
+bool TikTakToe::isGameBlockO(gameBlock block)
+{
+	return block == gameBlock::SET_WITH_O || block == gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE;
 }
 
 bool TikTakToe::isGameOverAndMarkItIfTrue()

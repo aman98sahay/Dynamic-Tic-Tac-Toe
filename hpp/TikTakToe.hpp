@@ -1,5 +1,7 @@
 #pragma once 
 
+#include <basicenums.hpp>
+
 class MeshData;
 class MeshPrinter;
 struct CurrentInputLocation {
@@ -16,15 +18,18 @@ public:
 	
 	TikTakToe(int length, int depth);
 
-
+	~TikTakToe();
 
 	void startGame();
 	void takeUserInput();
 private:
 
-	bool isDiagonalWinningSequence(int pL, bool pIsHorizontalBigger, bool pIsForwardLeading);
+	bool isDiagonalWinningSequence(bool pIsHorizontalBigger, bool pIsClockWiseLater, int l, int d, bool isX);
 	bool isNonDiagonalWinnerSequence(int pI, bool pIsHorizontal);
 
+	bool isGameBlockX(gameBlock block);
+	bool isGameBlockO(gameBlock block);
+	
 	bool isGameOverAndMarkItIfTrue();
 	
 	void ChangeDataOnInput ();
