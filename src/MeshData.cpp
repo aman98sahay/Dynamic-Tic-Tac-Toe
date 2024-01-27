@@ -34,6 +34,7 @@ gameBlock & MeshData::getDataAt(int pLength, int pDepth)
 
 void MeshData::setDataAt(int pLength, int pDepth, gameBlock pGameDataThere)
 {
+	assert(pLength < vLength && pDepth < vDepth);
 	data[pLength + vLength * pDepth] = pGameDataThere;
 }
 
