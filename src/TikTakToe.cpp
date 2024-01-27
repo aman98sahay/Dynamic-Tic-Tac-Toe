@@ -116,18 +116,18 @@ bool TikTakToe::isNonDiagonalWinnerSequence(int pI, bool pIsHorizontal)
 	if (pIsHorizontal) {
 		bool CheckingForX = isGameBlockX(data.getDataAt(0, pI));
 		for (int i = 1; i < data.getLength(); i++) {
-			if (CheckingForX == isGameBlockX(data.getDataAt(i, pI)))
-				return true;
+			if (CheckingForX != isGameBlockX(data.getDataAt(i, pI)))
+				return false;
 		}
 	}
 	else {
 		bool CheckingForX = isGameBlockX(data.getDataAt(pI, 0));
 		for (int i = 1; i < data.getLength(); i++) {
-			if (CheckingForX == isGameBlockX(data.getDataAt(pI, i)))
-				return true;
+			if (CheckingForX != isGameBlockX(data.getDataAt(pI, i)))
+				return false;
 		}
 	}
-	return false;
+	return true;
 }
 
 bool TikTakToe::isGameBlockX(gameBlock block)
