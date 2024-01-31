@@ -188,6 +188,8 @@ bool TikTakToe::isNonDiagonalWinnerSequenceMarkIfTrue(int pI, bool pIsHorizontal
 				}
 				isForLoopInvariantSet = false;
 				vicinity_same = 0;
+				if (currentValue != gameBlock::UNSET)
+					vicinity_same++;
 				continue;
 			}
 
@@ -238,6 +240,8 @@ bool TikTakToe::isNonDiagonalWinnerSequenceMarkIfTrue(int pI, bool pIsHorizontal
 				}
 				isForLoopInvariantSet = false;
 				vicinity_same = 0;
+				if (currentValue != gameBlock::UNSET)
+					vicinity_same++;
 				continue;
 			}
 
