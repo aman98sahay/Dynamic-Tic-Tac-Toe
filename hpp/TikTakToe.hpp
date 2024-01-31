@@ -28,7 +28,7 @@ private:
 	bool isNonDiagonalWinnerSequenceMarkIfTrue(int pI, bool pIsHorizontal);
 
 	static bool isGameBlockX(gameBlock block);
-	
+	static bool areBlocksSameAndBothNotUnset(gameBlock block1, gameBlock block2);
 	void ChangeDataOnInput ();
 
 	void internalGameRuleChecker();

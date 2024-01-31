@@ -79,8 +79,11 @@ bool TikTakToe::isDiagonalWinningSequenceMarkIfTrue(bool pIsHorizontalBigger, bo
 
 		if (isGameBlockX(data.getDataAt(l, d)) == isX && data.getDataAt(l, d) != gameBlock::UNSET) {
 
-			if (d == data.getDepth() - 1)
+			if (d == data.getDepth() - 1) {
+
+				data.setDataAt(l, d, isX ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
 				return true;
+			}
 
 			if (pIsClockWiseLater)
 				rc = isDiagonalWinningSequenceMarkIfTrue(pIsHorizontalBigger, pIsClockWiseLater, l - 1, d + 1, isX);
@@ -136,43 +139,127 @@ input
 */
 bool TikTakToe::isNonDiagonalWinnerSequenceMarkIfTrue(int pI, bool pIsHorizontal)
 {
+	static const int SmallerOfTheDimensions = data.getDepth() >= data.getLength() ? data.getLength() : data.getDepth();
+	int vicinity_same = 0;
+	gameBlock comparingWith = gameBlock::UNSET;
+	gameBlock currentValue;
+	bool isForLoopInvariantSet = false;
 	if (pIsHorizontal) {
 
-		if (data.getDataAt(0, pI) == gameBlock::UNSET)
-			return false;
+		const int length = data.getLength();
 
-		bool CheckingForX = isGameBlockX(data.getDataAt(0, pI));
-		for (int i = 1; i < data.getLength(); i++) {
-			if (CheckingForX != isGameBlockX(data.getDataAt(i, pI)) || data.getDataAt(i, pI) == gameBlock::UNSET)
-				return false;
-		}
+		for (int i = 0; i <= length; i++) {
 
-		for (int i = 0; i < data.getLength(); i++) {
-			data.setDataAt(i, pI, CheckingForX ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
+			if (i == length) {
+				if (vicinity_same >= SmallerOfTheDimensions) {
+					for (size_t j = 0; j < vicinity_same; j++)
+					{
+						data.setDataAt(i - 1 - j, pI, comparingWith == gameBlock::SET_WITH_X ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
+
+					}
+					return true;
+				}
+				break;
+			}
+			else
+				currentValue = data.getDataAt(i, pI);
+
+
+			if (!isForLoopInvariantSet) {
+
+				comparingWith = currentValue;
+				if (comparingWith == gameBlock::UNSET)
+					continue;
+
+				isForLoopInvariantSet = true;
+				vicinity_same++;
+				continue;
+			}
+
+
+			if (currentValue == gameBlock::UNSET || currentValue != comparingWith) {
+				if (vicinity_same >= SmallerOfTheDimensions) {
+					for (size_t j = 0; j < vicinity_same; j++)
+					{
+						data.setDataAt(i - 1 - j, pI, comparingWith == gameBlock::SET_WITH_X ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
+
+					}
+					return true;
+				}
+				isForLoopInvariantSet = false;
+				vicinity_same = 0;
+				continue;
+			}
+
+			vicinity_same++;
+
 		}
 	}
 	else {
 
-		if (data.getDataAt(pI, 0) == gameBlock::UNSET)
-			return false;
+		const int depth = data.getDepth();
 
-		bool CheckingForX = isGameBlockX(data.getDataAt(pI, 0));
+		for (int i = 0; i <= depth; i++) {
 
-		for (int i = 1; i < data.getDepth(); i++) {
-			if (CheckingForX != isGameBlockX(data.getDataAt(pI, i)) || data.getDataAt(pI, i) == gameBlock::UNSET)
-				return false;
-		}
+			if (i == depth) {
+				if (vicinity_same >= SmallerOfTheDimensions) {
+					for (size_t j = 0; j < vicinity_same; j++)
+					{
+						data.setDataAt(pI, i - 1 - j, comparingWith == gameBlock::SET_WITH_X ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
+					}
+					return true;
+				}
+				break;
+			}
+			else
+				currentValue = data.getDataAt(pI, i);
 
-		for (int i = 0; i < data.getDepth(); i++) {
-			data.setDataAt(pI, i, CheckingForX ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
+
+			if (!isForLoopInvariantSet) {
+
+				comparingWith = currentValue;
+				if (comparingWith == gameBlock::UNSET)
+					continue;
+
+				isForLoopInvariantSet = true;
+				vicinity_same++;
+				continue;
+			}
+
+
+			if (currentValue == gameBlock::UNSET || currentValue != comparingWith) {
+				if (vicinity_same >= SmallerOfTheDimensions) {
+					for (size_t j = 0; j < vicinity_same; j++)
+					{
+						data.setDataAt(pI, i - 1 - j, comparingWith == gameBlock::SET_WITH_X ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
+
+					}
+					return true;
+				}
+				isForLoopInvariantSet = false;
+				vicinity_same = 0;
+				continue;
+			}
+
+			vicinity_same++;
+
 		}
 	}
-	return true;
+
+	return false;
 }
 
 bool TikTakToe::isGameBlockX(gameBlock block)
 {
 	return block == gameBlock::SET_WITH_X || block == gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE;
+}
+
+bool TikTakToe::areBlocksSameAndBothNotUnset(gameBlock block1, gameBlock block2)
+{
+	if (block1 == gameBlock::UNSET || block2 == gameBlock::UNSET)
+		return false;
+
+	return block1 == block2;
 }
 
 void TikTakToe::ChangeDataOnInput()
