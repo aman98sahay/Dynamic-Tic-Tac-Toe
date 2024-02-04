@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climits>
 
 #include "TikTakToe.hpp"
 #include "MeshData.hpp"
@@ -152,7 +153,7 @@ bool TikTakToe::isNonDiagonalWinnerSequenceMarkIfTrue(int pI, bool pIsHorizontal
 
 			if (i == length) {
 				if (vicinity_same >= SmallerOfTheDimensions) {
-					for (size_t j = 0; j < vicinity_same; j++)
+					for (int j = 0; j < vicinity_same; j++)
 					{
 						data.setDataAt(i - 1 - j, pI, comparingWith == gameBlock::SET_WITH_X ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
 
@@ -179,7 +180,7 @@ bool TikTakToe::isNonDiagonalWinnerSequenceMarkIfTrue(int pI, bool pIsHorizontal
 
 			if (currentValue == gameBlock::UNSET || currentValue != comparingWith) {
 				if (vicinity_same >= SmallerOfTheDimensions) {
-					for (size_t j = 0; j < vicinity_same; j++)
+					for (int j = 0; j < vicinity_same; j++)
 					{
 						data.setDataAt(i - 1 - j, pI, comparingWith == gameBlock::SET_WITH_X ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
 
@@ -205,7 +206,7 @@ bool TikTakToe::isNonDiagonalWinnerSequenceMarkIfTrue(int pI, bool pIsHorizontal
 
 			if (i == depth) {
 				if (vicinity_same >= SmallerOfTheDimensions) {
-					for (size_t j = 0; j < vicinity_same; j++)
+					for (int j = 0; j < vicinity_same; j++)
 					{
 						data.setDataAt(pI, i - 1 - j, comparingWith == gameBlock::SET_WITH_X ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
 					}
@@ -231,7 +232,7 @@ bool TikTakToe::isNonDiagonalWinnerSequenceMarkIfTrue(int pI, bool pIsHorizontal
 
 			if (currentValue == gameBlock::UNSET || currentValue != comparingWith) {
 				if (vicinity_same >= SmallerOfTheDimensions) {
-					for (size_t j = 0; j < vicinity_same; j++)
+					for (int j = 0; j < vicinity_same; j++)
 					{
 						data.setDataAt(pI, i - 1 - j, comparingWith == gameBlock::SET_WITH_X ? gameBlock::SET_WITH_X_WITH_WINNING_SEQUENCE : gameBlock::SET_WITH_O_WITH_WINNING_SEQUENCE);
 
@@ -282,20 +283,20 @@ void TikTakToe::ChangeDataOnInput()
 void TikTakToe::internalGameRuleChecker()
 {
 	// checking horizontals
-	for (size_t i = 0; i < data.getDepth(); i++)
+	for (int i = 0; i < data.getDepth(); i++)
 	{
 		isGameOver = TikTakToe::isNonDiagonalWinnerSequenceMarkIfTrue(i, true) || isGameOver;
 	}
 
 	// checking verticals 
-	for (size_t i = 0; i < data.getLength(); i++)
+	for (int i = 0; i < data.getLength(); i++)
 	{
 		isGameOver = TikTakToe::isNonDiagonalWinnerSequenceMarkIfTrue(i, false) || isGameOver;
 	}
 
 	// checking diagonals 
 	if (data.getLength() >= data.getDepth()) {
-		for (size_t i = 0; i < data.getLength(); i++)
+		for (int i = 0; i < data.getLength(); i++)
 		{
 			bool isX = TikTakToe::isGameBlockX(data.getDataAt(i, 0));
 			isGameOver = TikTakToe::isDiagonalWinningSequenceMarkIfTrue(true, false, i, 0, isX) || isGameOver;
@@ -303,7 +304,7 @@ void TikTakToe::internalGameRuleChecker()
 		}
 	}
 	else {
-		for (size_t i = 0; i < data.getDepth(); i++)
+		for (int i = 0; i < data.getDepth(); i++)
 		{
 			bool isX = TikTakToe::isGameBlockX(data.getDataAt(0, i));
 			isGameOver = TikTakToe::isDiagonalWinningSequenceMarkIfTrue(false, false, 0, i, isX) || isGameOver;
@@ -335,7 +336,7 @@ void TikTakToe::takeUserInput()
 			endl(cout << "invalid input, please try again:");
 			cin.clear(); // clears the error flags
 			// this line discards all the vInput waiting in the stream
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cin.ignore(INT_MAX, '\n');  //as std::numeric_limits<std::streamsize>::max() is not compiling in linux
 		}
 
 		if (vInput.l > data.getLength() || vInput.d > data.getDepth() || data.getDataAt(vInput.l - 1, vInput.d - 1) != gameBlock::UNSET) {
