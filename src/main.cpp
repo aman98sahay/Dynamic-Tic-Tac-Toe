@@ -18,7 +18,7 @@ int main() {
 		endl(cout << "invalid input, please try again:");
 		cin.clear(); // clears the error flags
 		// this line discards all the vInput waiting in the stream
-		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cin.ignore(INT_MAX, '\n'); // as std::numeric_limits<std::streamsize>::max() is not compiling in linux
 	}
 
 	TikTakToe tk(depth, length);
