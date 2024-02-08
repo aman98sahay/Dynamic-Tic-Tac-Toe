@@ -23,7 +23,7 @@ That a player is able to mark at-least min(c,r) block in a straight line (could 
 
 ## How to build 
 
-(Note you have to install cmake on your system for this to work
+(Note you have to install cmake on your system for this to work)
 
 ```
 # goto any folder where u wish to clone & build
