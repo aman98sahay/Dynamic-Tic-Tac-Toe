@@ -4,7 +4,7 @@ project (TIC_TAK_TOE LANGUAGES CXX)
 set (CMAKE_GENERATOR "Visual Studio 17 2022") # why is it still generating through ninja though I am setting this
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(tik_tak_toe 
+add_executable(dynamic_tik_tak_toe 
 
 	"src/main.cpp"
 	"src/MeshData.cpp" 
@@ -16,7 +16,7 @@ add_executable(tik_tak_toe
 
 )
 
-target_include_directories(tik_tak_toe PUBLIC
+target_include_directories(dynamic_tik_tak_toe PUBLIC
 
 	${CMAKE_SOURCE_DIR}/hpp/
 )
