@@ -5,7 +5,7 @@ Is a new take on the normal Tic Tac Toe, with a way to expand this game that we 
 Rules of the game.
 
 1. Before start the number of rows and columns have to be selected. (suppose the player have selected r rows and c columns (r and c can be different)
-2. The Game is played between 2 player, one will select 'O' and the other will select 'X', and will take turns to select a 
+2. The Game is played between 2 player, one will select 'O' and the other will select 'X', and will take turns to select 
 	a block in the mesh( the rows and columns we have decided).
 3. This will go on till either all the boxes are filled, or one of the players completes the winning condition. 
 	
@@ -14,7 +14,7 @@ Rules of the game.
 
 ```
 
-That a player is able to mark at-least min (c,r) block in a line (could be horizontal/vertical/diagonal)
+That a player is able to mark at-least min(c,r) block in a straight line (could be horizontal/vertical/diagonal)
 
 
 ```
