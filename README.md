@@ -36,3 +36,12 @@ cmake ..
 cmake --build .
 
 ```
+
+## Works on Linux/Mac/Windows
+
+## What to expect 
+
+<img width="589" alt="Screenshot 2024-02-14 at 8 31 22 AM" src="https://github.com/aman98sahay/Dynamic-Tic-Tac-Toe/assets/51999416/747418dc-6cb6-4998-a582-565bbde89954">
+
+<img width="351" alt="Screenshot 2024-02-14 at 8 31 46 AM" src="https://github.com/aman98sahay/Dynamic-Tic-Tac-Toe/assets/51999416/db3db314-6b19-4608-8d78-1ef1bbc3320c">
+
