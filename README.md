@@ -13,7 +13,8 @@ Rules of the game.
 ## What is the winning condition
 
 ```
-
+c = number of columns
+r = number of rows
 That a player is able to mark at-least min(c,r) block in a straight line (could be horizontal/vertical/diagonal)
 
 
