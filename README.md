@@ -45,4 +45,11 @@ cmake --build .
 <img width="589" alt="Screenshot 2024-02-14 at 8 31 22 AM" src="https://github.com/aman98sahay/Dynamic-Tic-Tac-Toe/assets/51999416/747418dc-6cb6-4998-a582-565bbde89954">
 
 <img width="351" alt="Screenshot 2024-02-14 at 8 31 46 AM" src="https://github.com/aman98sahay/Dynamic-Tic-Tac-Toe/assets/51999416/db3db314-6b19-4608-8d78-1ef1bbc3320c">
+### running on MacOS 
 
+![Screenshot 2024-04-08 185658](https://github.com/aman98sahay/Dynamic-Tic-Tac-Toe/assets/51999416/6c7af241-6c2b-4f94-a0e0-0badbd43880c)
+### running on Windows 
+
+![WhatsApp Image 2024-04-08 at 18 57 30_463ae127](https://github.com/aman98sahay/Dynamic-Tic-Tac-Toe/assets/51999416/1198717f-77d2-4265-b81f-da3ba4a8c835)
+
+### running on iSH app in iOS 
