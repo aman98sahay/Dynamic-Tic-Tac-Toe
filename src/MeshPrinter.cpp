@@ -2,6 +2,8 @@
 #include "MeshData.hpp"
 #include <iostream>
 
+#include "basicenums.hpp"
+
 void MeshPrinter::PrivatePrintLocationColor(gameBlock pBlockType)
 {
 	using std::cout;

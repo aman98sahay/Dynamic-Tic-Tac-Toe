@@ -1,7 +1,8 @@
 #pragma once 
 
-#include <basicenums.hpp>
+#include <cstdint>
 
+enum class gameBlock : int8_t;
 class MeshData;
 class MeshPrinter;
 struct CurrentInputLocation {

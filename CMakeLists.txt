@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 project (TIC_TAK_TOE LANGUAGES CXX)
-set (CMAKE_GENERATOR "Visual Studio 17 2022") # why is it still generating through ninja though I am setting this
+set (CMAKE_GENERATOR "Visual Studio 17 2022") 
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(dynamic_tik_tak_toe 

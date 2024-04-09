@@ -1,5 +1,8 @@
 #include "MeshData.hpp"
 #include <assert.h>
+
+#include "basicenums.hpp"
+
 MeshData::MeshData(int l, int d) 
 {
 	data = new gameBlock[l * d];

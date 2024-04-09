@@ -4,6 +4,7 @@
 #include "TikTakToe.hpp"
 #include "MeshData.hpp"
 #include "MeshPrinter.hpp"
+#include "basicenums.hpp"
 
 TikTakToe::TikTakToe(int depth, int length) :
 	data(*(new MeshData(length, depth))),

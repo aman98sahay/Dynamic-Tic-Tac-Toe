@@ -1,6 +1,7 @@
 #pragma once 
+#include <cstdint>
 
-#include "basicenums.hpp"
+enum class gameBlock : int8_t;
 
 class MeshData {
 public:

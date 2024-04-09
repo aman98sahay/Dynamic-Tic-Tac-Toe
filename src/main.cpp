@@ -3,8 +3,6 @@
 
 using namespace std;
 
-#include <MeshData.hpp>
-#include <MeshPrinter.hpp>
 #include <TikTakToe.hpp>
 
 int main() {
