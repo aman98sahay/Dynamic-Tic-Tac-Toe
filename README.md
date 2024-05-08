@@ -8,7 +8,10 @@ Rules of the game.
 2. The Game is played between 2 player, one will select 'O' and the other will select 'X', and will take turns to select 
 	a block in the mesh( the rows and columns we have decided).
 3. This will go on till either all the boxes are filled, or one of the players completes the winning condition. 
-	
+
+ ## Requirements
+cmake version > 3.20
+g++ (for mac and linux) and Visual Studio 2022 for windows (for windows will also work with mingw)
 
 ## What is the winning condition
 
