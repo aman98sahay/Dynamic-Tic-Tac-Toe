@@ -11,6 +11,7 @@ Rules of the game.
 
  ## Requirements
 cmake version > 3.20
+
 g++ (for mac and linux) and Visual Studio 2022 for windows (for windows will also work with mingw)
 
 ## What is the winning condition
